@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accelerating High-Fidelity Road Network Modeling for Indian Traffic Simulations | MATLAB & RoadRunner Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Three.js and OrbitControls for High-Fidelity 3D WebGL Scene Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="showSection('home')" style="cursor: pointer;">
+                <i class="fas fa-road"></i>
+                <span>IndianRoad.AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#osm-analyzer" class="nav-link">OSM Analyzer</a></li>
+                <li><a href="#scene-builder" class="nav-link">3D Builder</a></li>
+                <li><a href="#traffic-sim" class="nav-link">Traffic Sim</a></li>
+                <li><a href="#workflow" class="nav-link">Workflows</a></li>
+                <li><a href="#matlab-explorer" class="nav-link">MATLAB Code</a></li>
+                <li><a href="#cities" class="nav-link">Cities</a></li>
+                <li><a href="#analytics" class="nav-link">Analytics</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toolkit.toggleTheme()" title="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-blue); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-blue); margin-bottom: 20px;">
+                    <i class="fas fa-bolt"></i> Accelerated Framework for Autonomous Driving & Smart Cities
+                </div>
+                <h1>Accelerating High-Fidelity Road Network Modeling for Indian Traffic Simulations</h1>
+                <p class="hero-subtitle">
+                    Automated OpenStreetMap GIS Ingestion, Procedural 3D RoadRunner Scene Synthesis, and Non-Lane-Based Mixed Traffic Simulation with Direct MATLAB Automated Driving Toolbox Integration.
+                </p>
+
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Real OSM GIS Parsing</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-cube"></i>
+                        <span>Parametric 3D WebGL</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-car-side"></i>
+                        <span>Heterogeneous Traffic</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fab fa-matlab"></i>
+                        <span>RoadRunner & MATLAB</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-cloud-showers-heavy"></i>
+                        <span>Monsoon & Friction &mu;</span>
+                    </div>
+                </div>
+
+                <!-- Architectural Pipeline Diagram -->
+                <div class="pipeline-flow">
+                    <div class="pipeline-card">
+                        <div class="pipeline-icon"><i class="fas fa-cloud-download-alt"></i></div>
+                        <div class="pipeline-info">
+                            <h4>1. GIS Ingestion</h4>
+                            <span>OSM XML/PBF & WGS84 UTM</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="pipeline-card">
+                        <div class="pipeline-icon"><i class="fas fa-project-diagram"></i></div>
+                        <div class="pipeline-info">
+                            <h4>2. Network Synthesis</h4>
+                            <span>IRC:86 Standards & Camber</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="pipeline-card">
+                        <div class="pipeline-icon"><i class="fas fa-cube"></i></div>
+                        <div class="pipeline-info">
+                            <h4>3. 3D Scene Builder</h4>
+                            <span>OpenDRIVE & RoadRunner</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="pipeline-card">
+                        <div class="pipeline-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <div class="pipeline-info">
+                            <h4>4. Micro-Simulation</h4>
+                            <span>Unlane Dynamics & IDM</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="pipeline-card">
+                        <div class="pipeline-icon"><i class="fab fa-matlab"></i></div>
+                        <div class="pipeline-info">
+                            <h4>5. MATLAB Export</h4>
+                            <span>Automated Driving Toolbox</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn btn-primary" onclick="showSection('scene-builder')">
+                        <i class="fas fa-cube"></i> Launch 3D Scene Builder
+                    </button>
+                    <button class="btn btn-secondary" onclick="showSection('traffic-sim')">
+                        <i class="fas fa-play"></i> Run Traffic Simulator
+                    </button>
+                    <button class="btn btn-outline" onclick="showSection('osm-analyzer')">
+                        <i class="fas fa-map"></i> Analyze OSM Corridor
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <h3>8</h3>
+                    <p>Major Indian Metros</p>
+                </div>
+                <div class="stat-card">
+                    <h3>120K+</h3>
+                    <p>Road Segments Analyzed</p>
+                </div>
+                <div class="stat-card">
+                    <h3>100%</h3>
+                    <p>MATLAB & RoadRunner Ready</p>
+                </div>
+                <div class="stat-card">
+                    <h3>&lt; 2s</h3>
+                    <p>Rapid Model Synthesis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OSM Analyzer Section -->
+    <section id="osm-analyzer" class="section">
+        <div class="container">
+            <h2><i class="fas fa-map-marked-alt"></i> OpenStreetMap Road Network Analyzer</h2>
+            <p style="color: var(--secondary-text); margin-bottom: 25px;">
+                Accelerated conversion of OpenStreetMap XML/PBF geospatial vector layers into MATLAB drivingScenario topologies with Indian Road Congress (IRC) road classifications and surface defect modeling.
+            </p>
+
+            <div class="analyzer-grid">
+                <div class="upload-area">
+                    <div class="file-upload-box" id="osmUploadBox">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drop real OSM or XML file here, or click to browse</p>
+                        <small>Native browser XML DOM parser handles .osm, .xml, and .pbf</small>
+                        <input type="file" id="osmFileInput" accept=".osm,.pbf,.xml" style="display: none;">
+                    </div>
+                    <div class="upload-actions">
+                        <button class="btn btn-primary" id="analyzeBtn" disabled>
+                            <i class="fas fa-chart-pie"></i> Analyze Road Network
+                        </button>
+                        <button class="btn btn-secondary" id="loadSampleBtn">
+                            <i class="fas fa-download"></i> Load Sample Data
+                        </button>
+                    </div>
+
+                    <!-- Preset Indian Corridors -->
+                    <div class="preset-corridors-bar">
+                        <span style="font-size: 0.82rem; color: var(--secondary-text);"><i class="fas fa-bolt"></i> Quick Corridors:</span>
+                        <button class="preset-corridor-btn" onclick="toolkit.loadPresetCorridor('hyderabad')">Hyderabad HITEC City</button>
+                        <button class="preset-corridor-btn" onclick="toolkit.loadPresetCorridor('mumbai')">Mumbai Western Express</button>
+                        <button class="preset-corridor-btn" onclick="toolkit.loadPresetCorridor('bangalore')">Bengaluru Silk Board</button>
+                        <button class="preset-corridor-btn" onclick="toolkit.loadPresetCorridor('delhi')">Delhi Ring Road</button>
+                        <button class="preset-corridor-btn" onclick="toolkit.loadPresetCorridor('chennai')">Chennai OMR</button>
+                        <button class="preset-corridor-btn" onclick="toolkit.loadPresetCorridor('kolkata')">Kolkata EM Bypass</button>
+                    </div>
+                </div>
+
+                <div class="analysis-results" id="analysisResults">
+                    <div class="result-header">
+                        <h3>Geospatial Network Metrics</h3>
+                        <div class="processing-indicator" id="processingIndicator">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Extracting graph topology & defects...</span>
+                        </div>
+                    </div>
+                    <div class="results-content" id="resultsContent">
+                        <p class="placeholder-text">Upload an OSM file or click any preset corridor above to inspect road classification, density, and defect vulnerability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Vector OSM Map View -->
+            <div class="osm-map-card">
+                <div class="osm-map-header">
+                    <h3><i class="fas fa-route"></i> Interactive Vector Road Map Visualization</h3>
+                    <span style="font-size: 0.85rem; color: var(--secondary-text);" id="osmMapStatus">Rendered via HTML5 Canvas Coordinate Engine</span>
+                </div>
+                <div class="osm-canvas-wrapper">
+                    <canvas id="osmMapCanvas"></canvas>
+                    <div class="map-controls-overlay">
+                        <button class="map-control-btn" onclick="toolkit.zoomMap(1.2)" title="Zoom In"><i class="fas fa-plus"></i></button>
+                        <button class="map-control-btn" onclick="toolkit.zoomMap(0.8)" title="Zoom Out"><i class="fas fa-minus"></i></button>
+                        <button class="map-control-btn" onclick="toolkit.resetMapView()" title="Reset Fit"><i class="fas fa-compress-arrows-alt"></i></button>
+                    </div>
+                    <div class="map-legend">
+                        <div class="legend-item"><span class="legend-dot legend-highway"></span> Highway (NH)</div>
+                        <div class="legend-item"><span class="legend-dot legend-arterial"></span> Arterial</div>
+                        <div class="legend-item"><span class="legend-dot legend-collector"></span> Collector</div>
+                        <div class="legend-item"><span class="legend-dot legend-local"></span> Local Street</div>
+                        <div class="legend-item"><span class="legend-dot legend-pothole"></span> Pothole / Hazard</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generated MATLAB Code -->
+            <div class="matlab-code-section" id="matlabCodeSection">
+                <h3><i class="fab fa-matlab"></i> Generated MATLAB Automated Driving Toolbox Code</h3>
+                <div class="code-container">
+                    <pre id="generatedMatlabCode"><code>% Upload and analyze an OSM file or pick a corridor to generate MATLAB integration code</code></pre>
+                    <button class="btn btn-outline copy-btn" onclick="copyToClipboard('generatedMatlabCode')">
+                        <i class="fas fa-copy"></i> Copy Code
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Scene Builder Section -->
+    <section id="scene-builder" class="section">
+        <div class="container">
+            <h2><i class="fas fa-cube"></i> High-Fidelity 3D Scene Builder</h2>
+            <p style="color: var(--secondary-text); margin-bottom: 25px;">
+                Parametric 3D WebGL synthesis modeling Indian carriageway geometries, heterogeneous vehicle meshes (auto-rickshaws, bikes, buses, trucks), road surface degradation, and atmospheric weather.
+            </p>
+
+            <div class="scene-builder-grid">
+                <div class="scene-controls">
+                    <div class="form-group">
+                        <label class="form-label">Target Indian City</label>
+                        <select class="form-control" id="citySelect">
+                            <option value="">Choose a city...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Road Classification</label>
+                        <select class="form-control" id="roadTypeSelect">
+                            <option value="highway">Expressway / National Highway (4-6 Lanes)</option>
+                            <option value="arterial">Urban Arterial with Flyover (3 Lanes)</option>
+                            <option value="collector">Collector Road (2 Lanes)</option>
+                            <option value="local">Local Urban Street (Narrow 1-2 Lanes)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Traffic Density</label>
+                        <select class="form-control" id="trafficDensitySelect">
+                            <option value="low">Free Flow (Low Density)</option>
+                            <option value="medium">Normal Urban Flow (Medium)</option>
+                            <option value="high">Heavy Congestion (High)</option>
+                            <option value="peak">Peak Hour Indian Gridlock</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Weather & Atmospheric Conditions</label>
+                        <select class="form-control" id="weatherSelect">
+                            <option value="clear">Clear Tropical Daylight</option>
+                            <option value="rain">Heavy Monsoon Rain (Reduced &mu;)</option>
+                            <option value="fog">Dense Winter Fog (Low Visibility)</option>
+                            <option value="dust">Dust Storm / Haze</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Indian Road Surface & Hazards</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="potholesCheck" checked> Potholes & Surface Craters</label>
+                            <label><input type="checkbox" id="constructionCheck" checked> Construction Barricades</label>
+                            <label><input type="checkbox" id="barricadesCheck"> Metro Rail Concrete Piers</label>
+                            <label><input type="checkbox" id="encroachmentCheck" checked> Informal Shoulder Encroachments</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full-width" id="generateSceneBtn">
+                        <i class="fas fa-magic"></i> Generate 3D Scene
+                    </button>
+                </div>
+
+                <div class="scene-preview">
+                    <div class="preview-header">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <h3>3D Scene Viewport</h3>
+                            <div class="view-mode-toggle">
+                                <button class="view-mode-btn active" id="btnMode3D" onclick="toolkit.switchViewMode('3d')">3D WebGL</button>
+                                <button class="view-mode-btn" id="btnMode2D" onclick="toolkit.switchViewMode('2d')">2D Schematic</button>
+                            </div>
+                        </div>
+                        <div class="preview-controls">
+                            <button class="btn btn-sm btn-primary" id="exportSceneBtn" disabled>
+                                <i class="fas fa-download"></i> Export (.rr / .xodr)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Camera Presets Bar -->
+                    <div class="camera-presets-bar">
+                        <span style="font-size: 0.8rem; color: var(--secondary-text);"><i class="fas fa-video"></i> Camera:</span>
+                        <button class="camera-btn active" onclick="toolkit.setCameraPreset('orbit')"><i class="fas fa-globe"></i> Orbit 3D</button>
+                        <button class="camera-btn" onclick="toolkit.setCameraPreset('top')"><i class="fas fa-satellite"></i> Bird's Eye</button>
+                        <button class="camera-btn" onclick="toolkit.setCameraPreset('chase')"><i class="fas fa-car"></i> Chase Cam</button>
+                        <button class="camera-btn" onclick="toolkit.setCameraPreset('dashcam')"><i class="fas fa-eye"></i> Dashcam</button>
+                        <button class="camera-btn" onclick="toolkit.setCameraPreset('street')"><i class="fas fa-street-view"></i> Street Level</button>
+                    </div>
+
+                    <!-- WebGL 3D Canvas Container -->
+                    <div id="webglSceneContainer">
+                        <div class="webgl-overlay-hud" id="webglHud" style="display: none;">
+                            <h5 id="hudTitle">Hyderabad - Highway</h5>
+                            <span id="hudMetrics">Traffic: High | Weather: Clear | Vehicles: 14</span>
+                        </div>
+                        <div class="placeholder-3d" id="placeholder3d">
+                            <i class="fas fa-cube"></i>
+                            <p>Select city parameters and click <strong>Generate 3D Scene</strong> to initialize WebGL viewport</p>
+                        </div>
+                    </div>
+
+                    <!-- 2D Schematic fallback canvas -->
+                    <div class="scene-canvas" id="sceneCanvas" style="display: none;"></div>
+
+                    <div class="scene-info" id="sceneInfo" style="margin-top: 15px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traffic Simulator Section -->
+    <section id="traffic-sim" class="section">
+        <div class="container">
+            <h2><i class="fas fa-car"></i> Heterogeneous Traffic Simulation Engine</h2>
+            <p style="color: var(--secondary-text); margin-bottom: 25px;">
+                Real-time micro-simulation running non-lane-based Intelligent Driver Model (IDM) vehicle dynamics, lateral gap creeping (motorcycles & auto-rickshaws), and dynamic bottleneck shockwaves around hazards.
+            </p>
+
+            <!-- Live Micro-Simulation Viewport -->
+            <div class="micro-sim-wrapper">
+                <div class="sim-toolbar">
+                    <div class="sim-btn-group">
+                        <button class="btn btn-primary btn-sm" id="simPlayPauseBtn" onclick="toolkit.toggleMicroSim()">
+                            <i class="fas fa-play" id="simPlayIcon"></i> <span id="simPlayText">Start Live Simulation</span>
+                        </button>
+                        <button class="btn btn-secondary btn-sm" onclick="toolkit.resetMicroSim()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                        <div style="display: inline-flex; gap: 4px; margin-left: 8px;">
+                            <button class="sim-speed-btn active" onclick="toolkit.setSimSpeed(1, this)">1x</button>
+                            <button class="sim-speed-btn" onclick="toolkit.setSimSpeed(2, this)">2x</button>
+                            <button class="sim-speed-btn" onclick="toolkit.setSimSpeed(4, this)">4x</button>
+                        </div>
+                    </div>
+
+                    <!-- Incident Injector Toolbar -->
+                    <div class="incident-toolbar">
+                        <span style="color: var(--secondary-text);"><i class="fas fa-tools"></i> Click Road to Drop:</span>
+                        <button class="incident-btn" id="btnDropPothole" onclick="toolkit.setIncidentTool('pothole')">
+                            <i class="fas fa-circle" style="color: #ec4899;"></i> Pothole
+                        </button>
+                        <button class="incident-btn" id="btnDropBarricade" onclick="toolkit.setIncidentTool('barricade')">
+                            <i class="fas fa-shield-alt" style="color: #f97316;"></i> Barricade
+                        </button>
+                        <button class="incident-btn" onclick="toolkit.spawnBreakdown()">
+                            <i class="fas fa-car-crash" style="color: #ef4444;"></i> Breakdown
+                        </button>
+                        <button class="incident-btn" onclick="toolkit.clearIncidents()">
+                            <i class="fas fa-trash-alt"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulation Canvas -->
+                <canvas id="microSimCanvas"></canvas>
+            </div>
+
+            <!-- Simulation Controls and Real-time Telemetry -->
+            <div class="simulation-grid">
+                <div class="sim-controls">
+                    <div class="form-group">
+                        <label class="form-label">Simulation Scenario Preset</label>
+                        <select class="form-control" id="simTypeSelect">
+                            <option value="mixed">Heterogeneous Mixed Traffic (Indian Standard)</option>
+                            <option value="peak">Peak Hour Commute Gridlock</option>
+                            <option value="monsoon">Monsoon Waterlogging (Friction &mu; = 0.35)</option>
+                            <option value="construction">Metro Construction Zone Chokepoint</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Duration</label>
+                        <input type="range" class="range-slider" id="durationSlider" min="5" max="60" value="15">
+                        <span id="durationValue">15 minutes</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Vehicle Composition Mix (Auto-Normalized)</label>
+                        <div class="vehicle-mix">
+                            <div class="vehicle-item">
+                                <span style="display: flex; justify-content: space-between;">
+                                    <span><i class="fas fa-car" style="color: #ff6b6b;"></i> Cars:</span>
+                                    <strong id="carPercentage">35%</strong>
+                                </span>
+                                <input type="range" id="carSlider" min="0" max="100" value="35">
+                            </div>
+                            <div class="vehicle-item">
+                                <span style="display: flex; justify-content: space-between;">
+                                    <span><i class="fas fa-motorcycle" style="color: #4ecdc4;"></i> Two-Wheelers:</span>
+                                    <strong id="bikePercentage">40%</strong>
+                                </span>
+                                <input type="range" id="bikeSlider" min="0" max="100" value="40">
+                            </div>
+                            <div class="vehicle-item">
+                                <span style="display: flex; justify-content: space-between;">
+                                    <span><i class="fas fa-taxi" style="color: #eab308;"></i> Auto-Rickshaws:</span>
+                                    <strong id="autoPercentage">15%</strong>
+                                </span>
+                                <input type="range" id="autoSlider" min="0" max="100" value="15">
+                            </div>
+                            <div class="vehicle-item">
+                                <span style="display: flex; justify-content: space-between;">
+                                    <span><i class="fas fa-truck" style="color: #45b7d1;"></i> Trucks / Heavy:</span>
+                                    <strong id="truckPercentage">5%</strong>
+                                </span>
+                                <input type="range" id="truckSlider" min="0" max="100" value="5">
+                            </div>
+                            <div class="vehicle-item">
+                                <span style="display: flex; justify-content: space-between;">
+                                    <span><i class="fas fa-bus" style="color: #f7dc6f;"></i> City Buses:</span>
+                                    <strong id="busPercentage">5%</strong>
+                                </span>
+                                <input type="range" id="busSlider" min="0" max="100" value="5">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-full-width" id="runSimulationBtn">
+                        <i class="fas fa-sync-alt"></i> Recalculate Batch Analytics
+                    </button>
+                </div>
+
+                <div class="sim-results">
+                    <div class="sim-status" id="simStatus">
+                        <div class="status-indicator">Real-time simulation active: Click canvas above to inject hazards</div>
+                    </div>
+                    <div class="sim-charts">
+                        <div class="chart-container" style="position: relative; height: 210px;">
+                            <canvas id="trafficFlowChart"></canvas>
+                        </div>
+                        <div class="chart-container" style="position: relative; height: 210px;">
+                            <canvas id="densityChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="sim-metrics" id="simMetrics"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Generator Section -->
+    <section id="workflow" class="section">
+        <div class="container">
+            <h2><i class="fas fa-project-diagram"></i> MATLAB & RoadRunner Workflow Generator</h2>
+            <p style="color: var(--secondary-text); margin-bottom: 25px;">
+                Complete end-to-end integration scripts for Automated Driving Toolbox, Driving Scenario Designer, RoadRunner Scene Builder, and Simulink vehicle dynamics.
+            </p>
+
+            <div class="workflow-grid">
+                <div class="workflow-selector">
+                    <h3>Select Simulation Workflow</h3>
+                    <div class="workflow-cards" id="workflowCards"></div>
+                </div>
+                <div class="workflow-preview">
+                    <h3 id="currentWorkflowTitle">Generated Workflow Pipeline</h3>
+                    <div class="workflow-steps" id="workflowSteps">
+                        <p class="placeholder-text">Select a workflow type to view execution steps and MATLAB code</p>
+                    </div>
+                    <div class="workflow-code" id="workflowCode">
+                        <pre><code>% Select a workflow to generate MATLAB code</code></pre>
+                    </div>
+                    <div class="workflow-actions">
+                        <button class="btn btn-primary" id="downloadWorkflowBtn" disabled>
+                            <i class="fas fa-download"></i> Download MATLAB (.m) Script
+                        </button>
+                        <button class="btn btn-secondary" id="copyWorkflowBtn" disabled>
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MATLAB Source Code Explorer Section -->
+    <section id="matlab-explorer" class="section">
+        <div class="container">
+            <h2><i class="fab fa-matlab"></i> Bundled MATLAB Source Code Explorer</h2>
+            <p style="color: var(--secondary-text); margin-bottom: 25px;">
+                Inspect, review, and download the full production MATLAB algorithms included in this toolkit for automated road network generation and 3D scene construction.
+            </p>
+
+            <div class="matlab-explorer-card">
+                <div class="explorer-tabs">
+                    <button class="explorer-tab active" onclick="toolkit.loadExplorerFile('osm_road_analyzer.m')">
+                        <i class="fab fa-matlab"></i> osm_road_analyzer.m (282 lines)
+                    </button>
+                    <button class="explorer-tab" onclick="toolkit.loadExplorerFile('scene_builder_3d.m')">
+                        <i class="fab fa-matlab"></i> scene_builder_3d.m (434 lines)
+                    </button>
+                    <button class="explorer-tab" onclick="toolkit.loadExplorerFile('matlab_workflows.json')">
+                        <i class="fas fa-code"></i> matlab_workflows.json
+                    </button>
+                    <button class="explorer-tab" onclick="toolkit.loadExplorerFile('traffic_patterns.json')">
+                        <i class="fas fa-sliders-h"></i> traffic_patterns.json
+                    </button>
+                </div>
+
+                <div class="code-viewer-container">
+                    <div class="code-viewer-header">
+                        <span id="explorerFileName"><i class="fab fa-matlab"></i> osm_road_analyzer.m</span>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn btn-sm btn-outline" onclick="toolkit.downloadCurrentExplorerFile()">
+                                <i class="fas fa-download"></i> Download File
+                            </button>
+                            <button class="btn btn-sm btn-secondary" onclick="toolkit.copyExplorerCode()">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-viewer-body">
+                        <pre><code id="explorerCodeContent">% Loading MATLAB source file...</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities Database Section -->
+    <section id="cities" class="section">
+        <div class="container">
+            <h2><i class="fas fa-city"></i> Indian Cities Road Network Database</h2>
+            <p style="color: var(--secondary-text); margin-bottom: 25px;">
+                Comprehensive road network characteristics, hierarchy breakdowns, major corridors, and specific traffic simulation challenges across 8 major Indian metropolitan centers.
+            </p>
+
+            <div class="cities-grid" id="citiesGrid"></div>
+            <div class="city-details" id="cityDetails" style="margin-top: 30px;">
+                <div class="placeholder-text">Select any city above to view detailed GIS breakdown and export models</div>
+            </div>
+
+            <!-- City Comparator Tool -->
+            <div class="city-comparator-section">
+                <h3><i class="fas fa-balance-scale"></i> Side-by-Side City Network Comparator</h3>
+                <p style="color: var(--secondary-text); margin-bottom: 20px;">
+                    Compare geometric road length, traffic densities, two-wheeler proportions, and vulnerability factors between two Indian metropolitan centers.
+                </p>
+
+                <div class="comparator-selectors">
+                    <div class="form-group" style="margin: 0;">
+                        <label class="form-label">City A</label>
+                        <select class="form-control" id="compareCityA" onchange="toolkit.updateCityComparison()"></select>
+                    </div>
+                    <div class="comparator-vs">VS</div>
+                    <div class="form-group" style="margin: 0;">
+                        <label class="form-label">City B</label>
+                        <select class="form-control" id="compareCityB" onchange="toolkit.updateCityComparison()"></select>
+                    </div>
+                </div>
+
+                <div class="comparator-grid" id="comparatorResults"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard Section -->
+    <section id="analytics" class="section">
+        <div class="container">
+            <h2><i class="fas fa-chart-line"></i> Analytics & Research Standards Dashboard</h2>
+            <p style="color: var(--secondary-text); margin-bottom: 25px;">
+                Macroscopic traffic fundamental relationships, Indian Roads Congress (IRC) Level of Service (LOS) criteria, Passenger Car Unit (PCU) conversion matrices, and modeling acceleration benchmarks.
+            </p>
+
+            <div class="analytics-grid">
+                <div class="metric-cards">
+                    <div class="metric-card">
+                        <i class="fas fa-road"></i>
+                        <div class="metric-content">
+                            <h3 id="totalRoads">0</h3>
+                            <p>Total Road Segments</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <i class="fas fa-city"></i>
+                        <div class="metric-content">
+                            <h3 id="citiesAnalyzed">8</h3>
+                            <p>Cities Modeled</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <i class="fas fa-cube"></i>
+                        <div class="metric-content">
+                            <h3 id="scenesGenerated">0</h3>
+                            <p>3D Scenes Synthesized</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <i class="fas fa-play"></i>
+                        <div class="metric-content">
+                            <h3 id="simulationsRun">0</h3>
+                            <p>Simulations Run</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-charts">
+                    <div class="chart-section">
+                        <h3>City Road Length & Density</h3>
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="cityTrafficChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-section">
+                        <h3>Overall Network Hierarchy Distribution</h3>
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="roadDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fundamental Traffic Diagram and IRC Standards -->
+            <div class="diagram-grid">
+                <div class="chart-section" style="background: var(--surface-bg); padding: 25px; border-radius: var(--border-radius-lg); border: 1px solid var(--border-color);">
+                    <h3><i class="fas fa-chart-area"></i> Speed-Flow-Density Fundamental Diagram (Greenshields Model)</h3>
+                    <p style="color: var(--secondary-text); font-size: 0.85rem; margin-bottom: 15px;">
+                        Calibrated for Indian mixed heterogeneous traffic conditions with capacity degradation factor $C_{adj} = 0.72$.
+                    </p>
+                    <div class="chart-container" style="position: relative; height: 260px;">
+                        <canvas id="fundamentalDiagramChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-section" style="background: var(--surface-bg); padding: 25px; border-radius: var(--border-radius-lg); border: 1px solid var(--border-color);">
+                    <h3><i class="fas fa-table"></i> IRC:106-1990 Passenger Car Unit (PCU) Standards</h3>
+                    <p style="color: var(--secondary-text); font-size: 0.85rem; margin-bottom: 15px;">
+                        Equivalence conversion factors applied in Indian traffic engineering to convert heterogeneous traffic into equivalent passenger cars.
+                    </p>
+                    <div class="irc-table-wrapper" style="margin: 0; max-height: 260px; overflow-y: auto;">
+                        <table class="irc-table">
+                            <thead>
+                                <tr>
+                                    <th>Vehicle Classification</th>
+                                    <th>PCU Factor (Urban)</th>
+                                    <th>Dynamic Footprint</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Passenger Car / Taxi</td><td><strong>1.00</strong></td><td>Standard Car</td></tr>
+                                <tr><td>Two-Wheeler (Motorcycle/Scooter)</td><td><strong>0.50</strong></td><td>Filters laterally</td></tr>
+                                <tr><td>Auto-Rickshaw (Three-Wheeler)</td><td><strong>1.20</strong></td><td>High maneuverability</td></tr>
+                                <tr><td>City Bus / Coach</td><td><strong>2.80</strong></td><td>Frequent stops</td></tr>
+                                <tr><td>Light Commercial Vehicle (LCV)</td><td><strong>1.40</strong></td><td>Tata Ace / Bolero</td></tr>
+                                <tr><td>Heavy Commercial Vehicle (HCV)</td><td><strong>3.00</strong></td><td>Ashok Leyland / Tata</td></tr>
+                                <tr><td>Bicycle / Pedestrian</td><td><strong>0.40</strong></td><td>Vulnerable User</td></tr>
+                                <tr><td>Animal Drawn Cart / Tractor</td><td><strong>4.00</strong></td><td>Extreme Bottleneck</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Modal for Code Preview -->
+    <div class="modal hidden" id="codeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>MATLAB Code Preview</h3>
+                <button class="modal-close" onclick="closeModal('codeModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre id="modalCodeContent"><code></code></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="downloadCode()">
+                    <i class="fas fa-download"></i> Download (.m)
+                </button>
+                <button class="btn btn-secondary" onclick="copyModalCode()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
